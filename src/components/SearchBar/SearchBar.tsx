@@ -1,11 +1,15 @@
 import toast, { Toaster } from "react-hot-toast";
 import s from "./SearchBar.module.css";
 import { BsSearch } from "react-icons/bs";
-const SearchBar = ({ onSubmit }) => {
-  const handleSubmitImg = (e) => {
+import { FormEvent } from "react";
+import { SearchBarProps } from "./SearchBar.types";
+const SearchBar: React.FC<SearchBarProps> = ({ onSubmit }) => {
+  const handleSubmitImg = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const form = e.target;
-    const value = form.elements.searchInput.value;
+    const form = e.target as HTMLFormElement;
+    const elements = form.elements as HTMLFormControlsCollection;
+    const searchInput = elements.namedItem("searchInput") as HTMLInputElement;
+    const value = searchInput.value;
     if (value.trim() === "") {
       form.reset();
       toast.error("Please enter your request!");

@@ -1,20 +1,21 @@
 import { useEffect, useState } from "react";
-import { fetchImages } from "./services/api";
-import SearchBar from "./components/SearchBar/SearchBar";
-import ImageGallery from "./components/ImageGallery/ImageGallery";
-import LoadMoreBtn from "./components/LoadMoreBtn/LoadMoreBtn";
-import Loader from "./components/Loader/Loader";
-import ErrorMessage from "./components/ErrorMessage/ErrorMessage";
-import ImageModal from "./components/ImageModal/ImageModal";
+import { fetchImages } from "../../services/api";
+import SearchBar from "../SearchBar/SearchBar";
+import ImageGallery from "../ImageGallery/ImageGallery";
+import LoadMoreBtn from "../LoadMoreBtn/LoadMoreBtn";
+import Loader from "../Loader/Loader";
+import ErrorMessage from "../ErrorMessage/ErrorMessage";
+import ImageModal from "../ImageModal/ImageModal";
+import { Image } from "./App.types";
 
 function App() {
-  const [images, setImages] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [isError, setIsError] = useState(false);
-  const [query, setQuery] = useState("");
-  const [page, setPage] = useState(1);
-  const [selectedImage, setSelectedImage] = useState(null);
-  const [isOpen, setIsOpen] = useState(false);
+  const [images, setImages] = useState<Image[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isError, setIsError] = useState<boolean>(false);
+  const [query, setQuery] = useState<string>("");
+  const [page, setPage] = useState<number>(1);
+  const [selectedImage, setSelectedImage] = useState<Image | null>(null);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
 
   useEffect(() => {
     if (!query) {
@@ -25,6 +26,8 @@ function App() {
         setIsError(false);
         setIsLoading(true);
         const data = await fetchImages(page, query);
+        console.log(data);
+
         setImages((prev) => [...prev, ...data.results]);
       } catch {
         setIsError(true);
@@ -35,7 +38,7 @@ function App() {
     getImages();
   }, [page, query]);
 
-  const handleSubmitImage = (value) => {
+  const handleSubmitImage = (value: string) => {
     setQuery(value);
     setImages([]);
     setPage(1);
@@ -45,7 +48,7 @@ function App() {
     setPage((prev) => prev + 1);
   };
 
-  const handelImageClick = (image) => {
+  const handelImageClick = (image: Image) => {
     if (image) {
       setSelectedImage(image);
       setIsOpen(true);

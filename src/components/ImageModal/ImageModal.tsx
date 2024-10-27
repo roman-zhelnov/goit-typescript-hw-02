@@ -1,8 +1,9 @@
 import Modal from "react-modal";
+import { ImageModalProps } from "./ImageModal.types";
 
 Modal.setAppElement("#root");
 
-function ImageModal({ isOpen, image, isClose }) {
+const ImageModal: React.FC<ImageModalProps> = ({ isOpen, image, isClose }) => {
   const customStyles = {
     content: {
       top: "50%",
@@ -32,10 +33,17 @@ function ImageModal({ isOpen, image, isClose }) {
         style={customStyles}
         contentLabel="Example Modal"
       >
-        <img src={image.urls.regular} alt={image.alt_description} />
+        {image ? (
+          <img
+            src={image.urls.regular}
+            alt={image.alt_description || "Image"}
+          />
+        ) : (
+          <p>No image available</p>
+        )}
       </Modal>
     </div>
   );
-}
+};
 
 export default ImageModal;
