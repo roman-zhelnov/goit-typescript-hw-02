@@ -1,0 +1,6 @@
+.errorBox {
+  display: flex;
+  justify-content: center;
+  color: red;
+  font-size: 32px;
+}

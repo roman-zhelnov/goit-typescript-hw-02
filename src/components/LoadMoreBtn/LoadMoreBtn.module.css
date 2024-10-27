@@ -1,0 +1,19 @@
+.btnBox {
+  display: flex;
+  justify-content: center;
+}
+
+.btn {
+  border: none;
+  border-radius: 10px;
+  background-color: rgb(10, 82, 82);
+  color: aliceblue;
+  font-size: 20px;
+  padding: 10px 20px;
+  transition: all 0.25s ease;
+}
+
+.btn:hover {
+  cursor: pointer;
+  background-color: rgb(13, 120, 120);
+}
