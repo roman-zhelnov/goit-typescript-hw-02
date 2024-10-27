@@ -26,8 +26,6 @@ function App() {
         setIsError(false);
         setIsLoading(true);
         const data = await fetchImages(page, query);
-        console.log(data);
-
         setImages((prev) => [...prev, ...data.results]);
       } catch {
         setIsError(true);
