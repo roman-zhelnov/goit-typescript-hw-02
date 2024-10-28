@@ -25,7 +25,7 @@ function App() {
       try {
         setIsError(false);
         setIsLoading(true);
-        const data: { results: Image[] } = await fetchImages(page, query);
+        const data = await fetchImages(page, query);
         setImages((prev) => [...prev, ...data.results]);
       } catch {
         setIsError(true);
